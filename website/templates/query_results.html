@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h3>Search Results:</h3>
+  <ul>
+  {% for trip in search %}
+    <li><a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }} - {{ trip.description }}</a></li> 
+  {% endfor %}
+  </ul>
+{% endblock %}

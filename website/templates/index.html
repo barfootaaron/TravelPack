@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+	<h3 id="index-title"> Welcome to TravelPack! </h3>
+	<hr>
+	
+    <ol>
+    <h4> Recently Added Trips </h4>
+      {% for trip in trips %}
+          <li><a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }} - {{ trip.description }}</a></li> 
+      {% endfor %}
+    </ol>
+
+{% endblock %}

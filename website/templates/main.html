@@ -1,0 +1,19 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	{% block title %}
+	<title>TravelPack</title>
+	{% endblock %}
+	{%include "styles.html"%}
+	<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}" />
+</head>
+<body>
+	{%include "navbar.html"%}
+
+	{% block content %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="col-xs-3"></div>
+<div class="col-xs-6">
+	<h3>Trip Categories</h3><br>
+
+	<ol>
+		{% for triptype in trip_types %}
+			<li> 
+			<a href="{{ triptype.get_absolute_url }}"> <h4>{{ triptype.trip_type_name }} </a>
+			({{ triptype.num_trips }})</h4> </li>
+
+			{% for trip in triptype.trips %}
+				<a href="{{ trip.get_absolute_url }}"> {{ trip.title }} </a>
+				<br />
+			{% endfor %}
+		<hr>
+		{% endfor %}
+	 </ol>
+</div>	 
+<div class="col-xs-3"></div>
+
+ {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+	<h1>Order # {{ order.id }}</h1>
+	<table>
+		<tr>
+		  <th><h4>Trip</h4></th>
+		  <th><h4>Price</h4></th>
+		</tr>
+		{% for trip in trips_in_cart %}
+		        <tr class="cart-line-item">
+		          <th> <a href="{% url 'website:single_trip' trip.trip.id %}"> {{ trip.trip }} </a> </th>
+		          <th> ${{ trip.trip.price }} </th>
+		        </tr>
+		{% endfor %}
+	
+		<tr>
+		  <th>Total:</th>
+		  <th> ${{ total }}</th>
+		</tr> 
+
+	</table>
+
+
+{% endblock %}

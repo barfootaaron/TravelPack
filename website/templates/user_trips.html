@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+    <h3> <a href="/profile"><u>{{ user.username}}'s</u></a> Trips</h3>
+
+
+	<ul>
+
+        {% if user.is_authenticated %}
+        {% for trip in user_trips %}
+            <h4><u>Trip: <a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }}</u></h4></a> 
+            <li>Cost: {{ trip.price }}
+            <br>
+
+            <li>Trips Sold: {{ trip.quantity_sold }}</li>
+            <li>Inventory Remaining: {{ trip.quantity }}</li>
+            <form method="post" action="{% url 'website:delete_user_trip' %}">
+              {% csrf_token %}
+                <input name="trip_id" type="hidden" value="{{ trip.id }}"/>
+                <input class="btn btn-danger btn-sm" type="submit" value="Delete Trip"/>
+            </form>
+            <br>
+        {% empty %}
+            
+        {% endfor %}
+    </ul>     
+
+	    	<a class="btn btn-default" href="/sell">Sell Another Trip</a>
+
+		{% endif %}
+
+
+{% endblock %}

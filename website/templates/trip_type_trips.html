@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block content %}
+
+	<hr>
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+	<h2>Showing All:
+		{% for trip_type in trip_types %} 
+			{{ trip_type }}</h2>
+		{% endfor %}
+
+		{% for trip in trips_of_type %} <br />
+			<h3>Trip: <a href="{{ trip.get_absolute_url }}"> {{ trip.title }} </a></h3>
+			<p>Trip Length: {{ trip.num_of_nights }} nights</p>
+			<p>Location: {{ trip.location }}</p>
+			<p>Price: ${{ trip.price }}</p>
+			<hr>
+		{% endfor %}
+	</div>
+	<div class="col-xs-2"></div>
+		
+
+{% endblock %}

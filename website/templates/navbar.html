@@ -1,0 +1,87 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+        <li class="">
+            <a href="/">
+                <h4>TravelPack</h4>
+            </a>
+        </li>
+        <li class="search-group">
+            <form action= "{% url 'website:search' %}" type="get" class="navbar-form navbar-left" role="search">
+                <input id="search_input" method="get" name="q" type="text" class="form-control" placeholder="Search TravelPack">
+                <input class="btn btn-default btn-sm" type="submit" value="Search">
+            </form>
+        </li>
+        <li>
+            <a href="/trips">
+            <button type="button" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>  All Trips
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="/trip_types">
+            <button type="button" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>  Trip Categories
+            </button>
+            </a>
+        </li>
+        {% if user.is_authenticated %}
+<!--         <li class="">
+            <a href="/sell">
+            <button type="button" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>  Sell Trips
+                </button>
+            </a>
+        </li> -->
+        <li class="">
+            <a href="/profile">
+                <button type="button" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  My Profile
+                </button>
+            </a>
+        </li>
+<!--         <li class="">
+            <a href="/user_trips">
+                <button type="button" class="btn btn-primary btn-sm">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>  My Trips
+                </button>
+            </a>
+        </li> -->
+        <li class="">
+            <a href="{% url 'website:logout' %}">
+                <button type="button" class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-log-out"></span>  Log out
+                </button>
+            </a>
+        </li>
+        {%else%}
+        <li class="">
+            <a href="/login">
+                <button type="button" class="btn btn-success btn-sm">
+                    <span class="glyphicon glyphicon-log-in"></span>  Login
+                </button>
+            </a>
+        </li>
+        <li class="">
+            <a href="/register">
+                <button type="button" class="btn btn-success btn-sm">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>  Register
+                </button>
+            </a>
+        </li>
+        {%endif%}
+        <li class="">
+            {% if user.is_authenticated %}
+            <a href="/cart">
+            {%else%}
+            <a href="/login">
+            {%endif%}
+                <button type="button" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart
+                </button>
+            </a>
+        </li>
+    </ul>
+  </div>
+</nav>

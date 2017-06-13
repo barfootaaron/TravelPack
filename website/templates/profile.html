@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+	<div class="col-xs-4"></div>
+	<div class="col-xs-4 profile-body">
+		{% if user.is_authenticated %}
+			<h4>Your Profile:</h4>
+			<br>
+			<p><strong>Username:</strong>  {{user.username}}</p>
+			<p><strong>First Name:</strong>  {{user.first_name}}</p>
+			<p><strong>Last Name:</strong>  {{user.last_name}}</p>
+			<p><strong>Email:</strong>  {{user.email}}</p>
+			<p><strong>Phone number:</strong>  {{customer.phone}}</p>
+			<p><strong>Street address:</strong>  {{customer.street_address}}</p>
+			<hr>
+			<p><strong>Your Order History:</strong></p>
+			{% for order in past_orders %}
+				<a href="{% url 'website:order_detail' order.id %}"><button class="btn btn-default">Order #{{order.id}}</button></a><br>
+			{% empty %}
+			No Orders have been placed for this customer.
+			{% endfor %}
+		{% endif %}
+
+		<br>
+		<hr>
+		<a class="btn btn-success profile-bttn" href="add_payment_type">Add a Payment Type</a>
+		<a class="btn btn-success prifile-bttn" href="user_payment_types">View Your Payment Types</a><br>
+			
+		<form id="update_form" action="{% url 'website:edit_settings' %}">
+		<button class="btn btn-info profile-bttn" type="submit" >Edit Profile</button>
+		</form>
+	</div>
+	<div class="col-xs-4"></div>	
+
+{% endblock %}

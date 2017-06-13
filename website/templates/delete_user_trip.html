@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+	<hr>
+    <h1>Trip Removed!</h1>
+
+    <a class="btn btn-default" href="{% url 'website:user_trips' %}">Return to your trips</a>
+    <a class="btn btn-default" href="{% url 'website:profile' %}">Return to your profile</a>
+
+{% endblock %}

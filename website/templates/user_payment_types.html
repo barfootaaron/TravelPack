@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+	<div class="col-xs-4"></div>		
+	<div class="col-xs-4">
+		<h3>Your Payment Types</h3>
+		<hr>    
+		<ul>
+		    {% if user.is_authenticated %}
+			{% for payment_type in user_payment_types %}
+			    <li class="payment-type-line">{{ payment_type.payment_type_name }}
+					<form action="{% url 'website:delete_payment_type' %}" method="POST">
+					{% csrf_token %}
+						<input type="hidden" name="payment_type_id" value="{{ payment_type.id }}">
+				        <button class="btn btn-danger">Delete</button>  
+			        </form>
+			    </li>
+			    <br>
+			    
+			{% empty %}
+			    <a class="btn btn-default" href="add_payment_type">Add a Payment Type</a>
+		    {% endfor %}
+		</ul>       
+	    
+		{% endif %}
+	</div>
+	<div class="col-xs-4"></div>	
+
+{% endblock %}

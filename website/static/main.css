@@ -1,0 +1,61 @@
+body {
+	background-color: #e0f7fa;
+	padding: 10px;
+	font-family: 'Bubbler One', sans-serif;
+}
+
+hr {
+	border-color: grey;
+}
+
+/* Nav */
+.search-group {
+	margin-top: 7px;
+}
+
+/* Login Page */
+
+#login-box {
+
+}
+
+/* Home Page */
+#index-title {
+	text-align: center;
+}
+
+
+.payment-type-line {
+	display: inline;
+}
+
+.cart-line-item {
+	padding: 20px;
+	border-bottom: 2px dotted black;
+}
+
+.nav .btn {
+	margin-right: 1px !important;
+}
+
+.profile-bttn {
+    margin: 10px;
+}
+
+/* Profile Page */
+.profile-body
+
+
+/* Trip Detail Page */
+.detail-pg-title {
+	text-align: center;
+}
+
+.trip-detail {
+	text-align: center;
+	list-style-type: none;
+}
+
+.trip-detail img {
+	margin-left: auto;
+}

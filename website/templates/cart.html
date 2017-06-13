@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% block content %}
+
+      <hr>
+      <h1>My Cart:</h1>
+    {% if total is not 0 %}
+      <table> 
+        <tr>
+          <th><h4>Trip Name</h4></th>
+          <th><h4>Trip Price</h4></th>
+        </tr>
+
+      {% for trip in trips_in_cart %}
+        <tr class="cart-line-item">
+          <th> <a href="{% url 'website:single_trip' trip.trip.id %}"> {{ trip.trip }} </a> </th>
+          <th> ${{ trip.trip.price }} </th>
+          <th>
+            {% if user.is_authenticated %} 
+            <form action="{% url 'website:delete_trip_from_cart' %}" method="POST">
+            {% csrf_token %}
+              <input type="hidden" name="the_id" value="{{ trip.id }}">
+              <input type="hidden" name="trip_id" value="{{ trip.trip_id }}">
+              <input type="hidden" name="order_id" value="{{ trip.order_id }}">
+              <button class="btn btn-danger btn-sm">Delete from Cart </button>
+            </form> 
+
+            {% endif %}
+          </th>
+        </tr>
+      {% endfor %}
+        <tr>
+          <th>Total:</th>
+          <th> ${{ total }}</th>
+        </tr> 
+
+      </table>
+
+      {% if user.is_authenticated %}
+      <form action="/checkout/{{ orderid }}/" method="POST">
+        <input type="hidden" name="total" value="{{ total }}">
+      {% csrf_token %}
+      <br>
+          <button class="btn btn-success btn-md">Complete Order</button>
+      </form>
+      {% endif %}
+
+      {% if user.is_authenticated %}
+      <form action="{% url 'website:final_order_view' %}" method="POST">
+        <input type="hidden" name="order_id" value="{{ orderid }}">
+      {% csrf_token %}
+
+        <button class="btn btn-warning btn-md">Cancel Order</button> 
+      </form>
+      {% endif %}
+
+
+    {% else %}
+
+    <h3>You have an empty cart!</h3><br><h2>Keep Shopping!!</h2>
+    
+    {% endif %}
+
+{% endblock %}

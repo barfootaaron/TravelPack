@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+	<div class="col-xs-4"></div>
+	<div class="col-xs-4">
+	    <h3>All Trips</h3>
+
+	    <ol>
+	    {% for trip in trips %}
+	        <li><a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }} - {{ trip.num_of_nights }} nights</a></li> 
+	    {% endfor %}
+	    </ol>
+	</div>
+	<div class="col-xs-4"></div>    
+
+{% endblock %}

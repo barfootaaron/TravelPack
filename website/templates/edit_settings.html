@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <hr>
+
+    <div class="col-xs-3"></div>  
+    <div class="col-xs-6">
+        <h4>Account Information:</h4>
+        <br>
+        <form action="{% url 'website:edit_settings' %}" method="post">
+            {% csrf_token %}
+            <h5>First Name:</h5><input class="form-control input-group" type="text" name="first_name" value="{{customer.user.first_name}}"><br>
+            <h5>Last Name:</h5><input class="form-control input-group" type="text" name="last_name" value="{{customer.user.last_name}}"><br>
+            <h5>Email:</h5><input class="form-control input-group" type="text" name="email" value="{{customer.user.email}}"><br>
+            <h5>Phone:</h5><input class="form-control input-group" type="text" name="phone" value="{{customer.phone}}"><br>
+            <h5>Street address:</h5><input class="form-control input-group" type="text" name="street_address" value="{{customer.street_address}}"><br><br>
+            <input type="submit" class="btn btn-success btn-small" value="Update" />
+        </form>
+    </div>
+    <div class="col-xs-3"></div>    
+
+{% endblock content %}
+
