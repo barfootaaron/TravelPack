@@ -58,8 +58,6 @@ class Customer(models.Model):
     street_address = models.CharField(max_length=255, blank=True, null=True)
 
 
-
-
 class PaymentType(models.Model):
     """
     purpose: Instantiates a payment type
@@ -78,6 +76,8 @@ class PaymentType(models.Model):
 
     def __str__(self):
         return self.payment_type_name
+
+
 
 class Order(models.Model):
     """

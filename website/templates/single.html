@@ -5,31 +5,24 @@
 {% load thumbnail %}
 {% load staticfiles %}
   
-    <h3 class="detail-pg-title">{{ trip.title }}</h3>
-      <div class="trip-detail-info">
-          <ul>
+    <h3 class="detail-pg-title">{{ trip.title }} - {{ trip.num_of_nights }} nights - ${{ trip.price }} per couple</h3>
+      <div class="row trip-detail-info">
+        <div class="col-xs-3"></div>
+          <div class="col-xs-6 info-div">
             <li><strong>Location:</strong> {{ trip.location }}</li>
             <li><strong>Category:</strong> {{ trip.trip_type }}</li>
-            <li><strong>Description:</strong> {{ trip.description }}</li>
-            <li><strong>Price per person:</strong> ${{ trip.price }}</li>
-            <li><strong>Trip length:</strong> {{ trip.num_of_nights }} nights</li>
-            
-<!--             {% if trip.quantity > 0 %}
-              <li><strong>Quantity Available:</strong> {{ trip.quantity }}</li>
-            {% else %}
-              <li><strong>Quantity Available: We are sorry, this trip is no longer available</strong></li>
-            {% endif %} -->
-                  
-          </ul>
-
+            <li><strong>Description:</strong> {{ trip.description }}</li> 
+          </div>  
+        <div class="col-xs-3"></div>  
            {% if trip.trip_img %}
-            <li class="trip-detail">
-              {% thumbnail trip.trip_img "750x750" crop="center" as im %}
+            <div class="trip-detail">
+              {% thumbnail trip.trip_img "1150x400" crop="center" as im %}
                 <a href="{{ trip.trip_img.url }}" target="_new">
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                <img class="trip-img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                 </a>
-              {% endthumbnail %}
-            </li>
+              {% endthumbnail %}     
+            </div>
+
           {% endif %}
       </div>    
     

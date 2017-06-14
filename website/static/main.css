@@ -1,5 +1,5 @@
 body {
-	background-color: #e0f7fa;
+	background-color: #d7ccc8;
 	padding: 10px;
 	font-family: 'Bubbler One', sans-serif;
 }
@@ -13,8 +13,13 @@ hr {
 	margin-top: 7px;
 }
 
-/* Login Page */
+.navbar {
+	background-color: #e3f2fd;
+	border-color: #e3f2fd;
+	margin: none;
+}
 
+/* Login Page */
 #login-box {
 
 }
@@ -34,10 +39,6 @@ hr {
 	border-bottom: 2px dotted black;
 }
 
-.nav .btn {
-	margin-right: 1px !important;
-}
-
 .profile-bttn {
     margin: 10px;
 }
@@ -45,17 +46,30 @@ hr {
 /* Profile Page */
 .profile-body
 
+/* Cart Page */
+
+
 
 /* Trip Detail Page */
-.detail-pg-title {
-	text-align: center;
-}
+
 
 .trip-detail {
 	text-align: center;
 	list-style-type: none;
 }
 
-.trip-detail img {
-	margin-left: auto;
+.trip-img {
+	max-width: 100%;
+	list-style-type: none;
 }
+
+.detail-pg-title {
+	text-align: center;
+	list-style-type: none;
+}
+
+.info-div {
+	list-style-type: none;
+}
+
+

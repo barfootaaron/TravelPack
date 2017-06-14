@@ -7,11 +7,15 @@
 	<h3 id="index-title"> Welcome to TravelPack! </h3>
 	<hr>
 	
-    <ol>
-    <h4> Recently Added Trips </h4>
-      {% for trip in trips %}
-          <li><a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }} - {{ trip.description }}</a></li> 
-      {% endfor %}
-    </ol>
+	<div class="col-xs-1"></div>
+	<div class="col-xs-10">
+	    <ol>
+	    <h4> Recently Added Trips </h4>
+	      {% for trip in trips %}
+	          <li><a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }} - {{ trip.description }}</a></li> 
+	      {% endfor %}
+	    </ol>
+	</div>    
+	<div class="col-xs-1"></div>    
 
 {% endblock %}
