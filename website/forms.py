@@ -10,12 +10,6 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password', 'first_name', 'last_name')
 
-class TripForm(forms.ModelForm): 
-
-    class Meta:
-        model = Trip
-        fields = ('title', 'num_of_nights', 'description', 'price', 'quantity', 'trip_type', 'trip_img', 'location',)
-
 class PaymentTypeForm(forms.ModelForm):
 
 	class Meta:

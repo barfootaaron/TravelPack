@@ -38,12 +38,6 @@
   <div class="col-xs-2">             
     {% if user.is_authenticated %}
     
-    <form action="{% url 'website:single_trip' trip.id %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="wishlist" value="">
-        <input class="btn add-to-cart-btn btn-success btn-lg" type="submit" value="Add to Wishlist">
-    </form>
-      
       {% if trip.quantity > 0 %}
       <form action="/add_to_cart/{{ trip.id }}/" method="POST">
       {% csrf_token %}
@@ -51,6 +45,13 @@
       </form>
       {% endif %}
     {% endif %}
+
+  <br>    
+    <form action="{% url 'website:single_trip' trip.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="wishlist" value="">
+        <input class="btn add-to-cart-btn btn-success btn-lg" type="submit" value="Add to Wishlist">
+    </form>  
   </div>
   <div class="col-xs-5"></div>  
 

@@ -9,7 +9,7 @@ from django.core.exceptions import MultipleObjectsReturned
 from django.contrib.auth.models import User
 from datetime import datetime
 
-from website.forms import UserForm, TripForm, PaymentTypeForm, OrderForm
+from website.forms import UserForm, PaymentTypeForm, OrderForm
 from website.models import Trip, TripType, PaymentType, TripOpinion, Order, TripOrder, Customer, WishList
 from django.db.models import Q
 
@@ -105,40 +105,6 @@ def user_logout(request):
     # in the URL in redirects?????
     return HttpResponseRedirect('/')
 
-@login_required(login_url='/login')
-def sell_trip(request):
-    """
-    Purpose: to present the user with a form to upload information about a trip to sell
-    Args: request -- the full HTTP request object
-    Returns: a form that lets a user upload a trip to sell
-    """
-    if request.method == 'GET':
-        trip_form = TripForm()
-        template_name = 'create.html'
-        return render(request, template_name, {'trip_form': trip_form})
-
-    elif request.method == 'POST':
-        form = TripForm(request.POST, request.FILES)
-        form_data = request.POST
-        
-        if form.is_valid():
-
-            trip = Trip()
-
-            trip.seller = request.user
-            trip.title = form.cleaned_data['title']
-            trip.description = form.cleaned_data['description']
-            trip.price = form.cleaned_data['price']
-            trip.quantity = form.cleaned_data['quantity']
-            trip.trip_type = TripType.objects.get(pk=form_data['trip_type'])
-            trip.trip_img = form.cleaned_data['trip_img']
-            trip.city = form.cleaned_data['city']
-
-            trip.save()
-
-            return render(request, 'success.html', {})
-        else:
-            return HttpResponse('Failure Submitting Form')      
 
 def list_trips(request):
     """
@@ -299,36 +265,6 @@ def delete_payment_type(request):
         return render(request, 'delete_payment_type.html', {'delete_payment_type': delete_payment_type})
 
 
-@login_required(login_url='/login')
-def user_trips(request):
-    """
-    Purpose: To retrieve a list of all trips for sale by a user
-    Args: request -- the full HTTP request object
-    Returns: list of trips sold by the current user
-    """
-
-    user_trips = Trip.objects.all().filter(seller = request.user)
-    template_name = 'user_trips.html'
-    return render(request, template_name, {'user_trips': user_trips})
-
-
-@login_required(login_url='/login')
-def delete_user_trip(request):
-    """
-    Purpose: Displays all of the authenticated user's trips and allows the user to delete them
-    Args: request -- the full HTTP request object
-    Returns: n/a 
-    """
-
-    user_trip_to_delete = request.POST['trip_id']
-    sold_user_trip = TripOrder.objects.all().filter(trip=user_trip_to_delete)
-
-    if sold_user_trip:
-        return HttpResponse("You Didn't Say The Magic Word!")
-
-    elif not sold_user_trip:
-        user_trip = Trip.objects.get(pk=user_trip_to_delete).delete()
-        return render(request, 'delete_user_trip.html', {'delete_user_trip': delete_user_trip})
 
 
 @login_required(login_url='/login')
