@@ -20,9 +20,15 @@ hr {
 }
 
 .navbar .btn {
+	margin-top: 2px;
+}
+
+.navbar .reg {
 	background-color: #009688;
 	border: none;
 }
+
+
 
 /* Login Page */
 #login-box {

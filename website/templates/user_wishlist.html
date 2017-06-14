@@ -9,11 +9,11 @@
     <h3 class="detail-pg-title"> <a href="/profile">{{ user.first_name}}'s</a> Wishlist</h3>
     <hr>
 	
-    <ul>
+    <ul class="wishlist-items">
         {% if user.is_authenticated %}
             {% for trip in user_wishlist %}
                 <a class="wishlist-items" href="{% url 'website:single_trip' trip.trip_id %}">
-                    <h4 >Trip: {{ trip.trip }} </h4> 
+                    <h4 class="wishlist-items">Trip: {{ trip.trip }} </h4> 
                 </a> 
                 <br>
             
