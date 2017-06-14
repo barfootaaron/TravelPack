@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 from website.forms import UserForm, TripForm, PaymentTypeForm, OrderForm
-from website.models import Trip, TripType, PaymentType, TripOpinion, Order, TripOrder, Customer
+from website.models import Trip, TripType, PaymentType, TripOpinion, Order, TripOrder, Customer, WishList
 from django.db.models import Q
 
 # standard Django view: query, template name, and a render method to render the data from the query into the template
@@ -160,15 +160,15 @@ def single_trip(request, trip_id):
     Returns: (render): a view of the request, template to use, and trip obj
     """
     if request.method == 'POST':
-        opinion = request.POST['opinion']
+        wishlist = request.POST['wishlist']
         current_customer = request.user.id
         current_user = User.objects.get(pk=current_customer)
         current_trip = Trip.objects.get(pk=trip_id)
 
         try:
-            trip_opinion = TripOpinion.objects.get(trip=current_trip, customer=current_user)
+            wish_list = WishList.objects.create(trip=current_trip, customer=current_user)
         except:
-            trip_opinion = TripOpinion.objects.create(trip=current_trip, customer=current_user, opinion=opinion)
+            wish_list = WishList.objects.create(trip=current_trip, customer=current_user, wishlist=wishlist)
 
         back_to_trip = '/single_trip/' + trip_id
         return HttpResponseRedirect(back_to_trip)
@@ -178,6 +178,17 @@ def single_trip(request, trip_id):
         trip = get_object_or_404(Trip, pk=trip_id)            
         return render(request, template_name, {"trip": trip})
 
+
+@login_required(login_url='/login')
+def user_wishlist(request):    
+    """
+    Purpose: Return the list of trips a user has added to their wishlist
+    Args: request -- the full HTTP request object
+    Returns: List of trips on the current user's wishlist
+    """
+    user_wishlist = WishList.objects.filter(customer = request.user)
+    template_name = 'user_wishlist.html'
+    return render(request, template_name, {"user_wishlist": user_wishlist})
 
 def list_trip_types(request):
     """
@@ -343,6 +354,7 @@ def add_trip_to_order(request, trip_id):
 
     return HttpResponseRedirect('/cart')
 
+
 @login_required(login_url='/login')
 def view_cart(request):
     """
@@ -435,6 +447,7 @@ def delete_trip_from_cart(request):
 
         return HttpResponseRedirect('/cart')
 
+@login_required(login_url='/login')
 def view_cancel_order(request):
     """
     Purpose: to cancel an order and remove it from the database
@@ -463,6 +476,8 @@ def search(request):
     return render(request, 'query_results.html', {})
 
 
+
+@login_required(login_url='/login')
 def view_order_detail(request, order_id):
     """
     Purpose: to show the user's past orders
@@ -482,6 +497,7 @@ def view_order_detail(request, order_id):
     return render(request, template_name, {"order": order, "total": total, "trips_in_cart": trips_in_cart})
 
 
+@login_required(login_url='/login')
 def update_profile(request):
     """
     Purpose: to update customer's profile settings

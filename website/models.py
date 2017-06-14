@@ -117,11 +117,10 @@ class TripOrder(models.Model):
         return self.trip.title
 
 
-
 class TripOpinion(models.Model):
     """
     purpose: Store trip likes and dislikes
-    args: extends the imported Django model class 
+    args: Extends the imported Django model class 
     returns: (None): N/A
     """
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
@@ -129,7 +128,17 @@ class TripOpinion(models.Model):
     opinion = models.IntegerField(default=0)
 
 
+class WishList(models.Model):
+    """
+    purpose: Store trip wishlist for each customer
+    args: Extends the imported django model class
+    returns: (None): N/A
+    """
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.trip.title
 
 
 

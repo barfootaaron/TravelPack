@@ -11,7 +11,7 @@
 
         {% if user.is_authenticated %}
         {% for trip in user_trips %}
-            <h4><u>Trip: <a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }}</u></h4></a> 
+            <h4><u>Trip: <a href="{% url 'website:single_trip' trip.trip_id %}">{{ trip.title }}</u></h4></a> 
             <li>Cost: {{ trip.price }}
             <br>
 
