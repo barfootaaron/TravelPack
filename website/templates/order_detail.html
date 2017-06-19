@@ -12,7 +12,13 @@
 		        <tr class="cart-line-item">
 		          <th> <a href="{% url 'website:single_trip' trip.trip.id %}"> {{ trip.trip }} </a> </th>
 		          <th> ${{ trip.trip.price }} </th>
-		        </tr>
+		        
+			        <a href="/review_trip">
+		            	<button type="button" class="btn btn-primary btn-sm">
+		                    <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>  Review this trip
+		                </button>
+	            	</a>
+            	</tr>
 		{% endfor %}
 	
 		<tr>

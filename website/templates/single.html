@@ -5,7 +5,7 @@
 {% load thumbnail %}
 {% load staticfiles %}
   
-<h2 class="detail-pg-title">{{ trip.title }} - {{ trip.num_of_nights }} nights - ${{ trip.price }} per couple</h2>
+<h2 class="detail-pg-title"><u>{{ trip.title }} - {{ trip.num_of_nights }} nights - ${{ trip.price }} per couple</u></h2>
 
 <div class="row">
   <div class="col-xs-12 trip-img-div">
@@ -27,7 +27,8 @@
   <div class="col-xs-6 info-div">
     <h4><strong>Location:</strong> {{ trip.location }}</h4>
     <h4><strong>Category:</strong> {{ trip.trip_type }}</h4>
-    <h4><strong>Description:</strong> {{ trip.description }}</h4> 
+    <h4><strong>Description:</strong> {{ trip.description }}</h4>
+    <h4><strong> *Available to depart through {{ trip.last_dep_date }} </strong> </h4>  
   </div>  
   <div class="col-xs-3"></div> 
 </div>   
@@ -44,7 +45,7 @@
           <button class="btn add-to-cart-btn btn-success btn-lg">Book Trip</button>
       </form>
       {% endif %}
-    {% endif %}
+
 
   <br>    
     <form action="{% url 'website:single_trip' trip.id %}" method="POST">
@@ -53,7 +54,14 @@
         <input class="btn add-to-cart-btn btn-success btn-lg" type="submit" value="Add to Wishlist">
     </form>  
   </div>
-  <div class="col-xs-5"></div>  
+  <div class="col-xs-5"></div>
+    {% endif %}  
+
+  
+
+  {% for review in reviews %}
+    <h3> HII{{ tripreview.rating }}</h3>
+  {% endfor %}  
 
 
 

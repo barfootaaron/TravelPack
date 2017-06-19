@@ -2,37 +2,47 @@
 
 {% block content %}
 
+	{% if user.is_authenticated %}
 	<div class="col-xs-4"></div>
 	<div class="col-xs-4 profile-body">
-		{% if user.is_authenticated %}
-			<h4>Your Profile:</h4>
+			<h4>{{ user.first_name}}'s Profile:</h4>
+			
+			<a class="btn btn-success profile-bttn" href="/user_wishlist">View Your Wishlist</a>
+			
 			<br>
+			
 			<p><strong>Username:</strong>  {{user.username}}</p>
 			<p><strong>First Name:</strong>  {{user.first_name}}</p>
 			<p><strong>Last Name:</strong>  {{user.last_name}}</p>
 			<p><strong>Email:</strong>  {{user.email}}</p>
 			<p><strong>Phone number:</strong>  {{customer.phone}}</p>
 			<p><strong>Street address:</strong>  {{customer.street_address}}</p>
+
+			<form id="update_form" action="{% url 'website:edit_settings' %}">
+				<button class="btn btn-info profile-bttn" type="submit" >Edit Profile</button>
+			</form>
 			<hr>
-			<p><strong>Your Order History:</strong></p>
+			
+			<p><strong>Order History:</strong></p>
 			{% for order in past_orders %}
 				<a href="{% url 'website:order_detail' order.id %}"><button class="btn btn-default">Order #{{order.id}}</button></a><br>
+				
 			{% empty %}
 			No Orders have been placed for this customer.
 			{% endfor %}
-		{% endif %}
-
-		<br>
+		
 		<hr>
-		<a class="btn btn-success profile-bttn" href="add_payment_type">Add a Payment Type</a>
-		<a class="btn btn-success profile-bttn" href="user_payment_types">View Your Payment Types</a><br>
+		<p><strong>Payment Options:</strong></p>
+		<a class="btn btn-success profile-bttn" href="/add_payment_type">Add a Payment Type</a>
+		<a class="btn btn-success profile-bttn" href="/user_payment_types">View Your Payment Types</a><br>
 
-		<a class="btn btn-success profile-bttn" href="user_wishlist">View Your Wishlist</a>
-			
+		<hr>			
 		<form id="update_form" action="{% url 'website:edit_settings' %}">
-		<button class="btn btn-info profile-bttn" type="submit" >Edit Profile</button>
+			<button class="btn btn-info profile-bttn" type="submit" >Edit Profile</button>
 		</form>
+	
 	</div>
-	<div class="col-xs-4"></div>	
+	<div class="col-xs-4"></div>
+	{% endif %}	
 
 {% endblock %}

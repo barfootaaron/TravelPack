@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from website.models import Trip, PaymentType, Order, Customer
+from website.models import Trip, PaymentType, Order, Customer, TripReview
 
 
 class UserForm(forms.ModelForm):
@@ -21,3 +21,9 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ('payment_type',)
+
+class TripReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = TripReview
+        fields = ('trip', 'rating', 'review_text')         

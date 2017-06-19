@@ -14,6 +14,12 @@
             {% for trip in user_wishlist %}
                 <a class="wishlist-items" href="{% url 'website:single_trip' trip.trip_id %}">
                     <h4 class="wishlist-items">Trip: {{ trip.trip }} </h4> 
+                    
+                    <form action="{% url 'website:remove_trip_from_wishlist' %}" method="POST">
+                    {% csrf_token %}
+                        <input type="hidden" name="wishlist_id" value="{{ trip.id }}">
+                        <button class="btn btn-danger">Remove</button>  
+                    </form>
                 </a> 
                 <br>
             

@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^order_detail(?P<order_id>[0-9]+)/$', views.view_order_detail, name='order_detail'),
     url(r'^edit_settings$', views.update_profile, name='edit_settings'),
     url(r'^user_wishlist$', views.user_wishlist, name='user_wishlist'),
+    url(r'^remove_trip_from_wishlist$', views.remove_trip_from_wishlist, name='remove_trip_from_wishlist'),
+    url(r'^review_trip$', views.review_trip, name='review_trip'),
 ]
 
 

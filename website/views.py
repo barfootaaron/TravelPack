@@ -9,8 +9,8 @@ from django.core.exceptions import MultipleObjectsReturned
 from django.contrib.auth.models import User
 from datetime import datetime
 
-from website.forms import UserForm, PaymentTypeForm, OrderForm
-from website.models import Trip, TripType, PaymentType, TripOpinion, Order, TripOrder, Customer, WishList
+from website.forms import UserForm, PaymentTypeForm, OrderForm, TripReviewForm
+from website.models import Trip, TripType, PaymentType, Order, TripOrder, Customer, WishList, TripReview
 from django.db.models import Q
 
 # standard Django view: query, template name, and a render method to render the data from the query into the template
@@ -125,6 +125,7 @@ def single_trip(request, trip_id):
     Args: trip_id: (integer): id of trip we are viewing 
     Returns: (render): a view of the request, template to use, and trip obj
     """
+
     if request.method == 'POST':
         wishlist = request.POST['wishlist']
         current_customer = request.user.id
@@ -136,12 +137,16 @@ def single_trip(request, trip_id):
         except:
             wish_list = WishList.objects.create(trip=current_trip, customer=current_user, wishlist=wishlist)
 
+
+
         back_to_trip = '/single_trip/' + trip_id
         return HttpResponseRedirect(back_to_trip)
 
     elif request.method == 'GET':
         template_name = 'single.html'
-        trip = get_object_or_404(Trip, pk=trip_id)            
+        trip = get_object_or_404(Trip, pk=trip_id)  
+
+         
         return render(request, template_name, {"trip": trip})
 
 
@@ -155,6 +160,24 @@ def user_wishlist(request):
     user_wishlist = WishList.objects.filter(customer = request.user)
     template_name = 'user_wishlist.html'
     return render(request, template_name, {"user_wishlist": user_wishlist})
+
+@login_required(login_url='/login')
+def remove_trip_from_wishlist(request): 
+    """
+    Purpose: Remove a trip from a users wishlist
+    Args: -- the full HTTP request object, trip_id - the id of the selected trip thats going to be deleted
+    Returns: The updated wishlist without the selected trip.
+    """
+    if request.method == 'POST':
+        try:
+            wishlist_item_to_delete = request.POST['wishlist_id']
+            wishlist_item = WishList.objects.get(pk=wishlist_item_to_delete).delete()
+        except:
+            user_wishlist = WishList.objects.filter(customer = request.user)
+
+        return HttpResponseRedirect('/user_wishlist')    
+
+
 
 def list_trip_types(request):
     """
@@ -370,7 +393,6 @@ def delete_trip_from_cart(request):
     Args: request -- the full HTTP request object, trip_id - the id of the selected trip thats going to be deleted
     Returns: an updated shopping cart without the selected trip
     """
-
     if request.method == 'POST':
         deleted_trip = request.POST['trip_id']
         order_for_deletion = request.POST['order_id']
@@ -458,5 +480,43 @@ def update_profile(request):
         context = {'customer': customer}
         template_name = 'edit_settings.html'
         return render(request, template_name, context)
+
+
+
+@login_required(login_url='/login')
+def review_trip(request):
+    """
+    Purpose: to present the user with a form to review a trip
+    Args: request -- the full HTTP request object
+    Returns: a form that lets a user post a trip review
+    """
+    if request.method == 'GET':
+        trip_review_form = TripReviewForm()
+        template_name = 'trip_review_form.html'
+        return render(request, template_name, {'trip_review_form': trip_review_form})
+
+    elif request.method == 'POST':
+        form = TripReviewForm(request.POST, request.FILES)
+        form_data = request.POST
+        
+        if form.is_valid():
+
+            trip_review = TripReview()
+
+            trip_review.customer = request.user
+            trip_review.trip = Trip.objects.get(pk=form_data['trip'])
+            trip_review.review_text = form.cleaned_data['review_text']
+            trip_review.rating = form.cleaned_data['rating']
+   
+            trip_review.save()
+
+            return render(request, 'review_success.html', {})
+        else:
+            return HttpResponse('Failure Submitting Form')      
+
+
+
+
+
 
 

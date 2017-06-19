@@ -36,6 +36,7 @@ class Trip(models.Model):
     location = models.TextField(blank=True, null=False)
     description = models.TextField(blank=True, null=False)
     price = models.DecimalField(max_digits=8, decimal_places=2, null=False)
+    last_dep_date = models.DateField('Last Available Departure Date', null=True)
     quantity = models.IntegerField()
     quantity_sold = models.IntegerField(default=0)
     trip_img = models.ImageField(blank=True, null=True) 
@@ -117,17 +118,6 @@ class TripOrder(models.Model):
         return self.trip.title
 
 
-class TripOpinion(models.Model):
-    """
-    purpose: Store trip likes and dislikes
-    args: Extends the imported Django model class 
-    returns: (None): N/A
-    """
-    trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
-    opinion = models.IntegerField(default=0)
-
-
 class WishList(models.Model):
     """
     purpose: Store trip wishlist for each customer
@@ -139,6 +129,25 @@ class WishList(models.Model):
 
     def __str__(self):
         return self.trip.title
+
+
+class TripReview(models.Model):
+    """
+    purpose: Store trip reviews added by users
+    args: Extends the imported Django model class 
+    returns: (None): N/A
+    """
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.DecimalField(max_digits=2, decimal_places=1, null=False)
+    review_text = models.TextField(blank=False, null=False)
+
+
+
+
+
+
+
 
 
 

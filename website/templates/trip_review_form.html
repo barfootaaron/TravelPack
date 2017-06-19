@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+	<hr>
+    <h3>Review Trip:</h3><br>
+
+
+    <form action="{% url 'website:review_trip' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ trip_review_form.as_p }}
+      <input type="submit" class="btn btn-success btn-lg" value="Post Review" />
+    </form>
+
+{% endblock %}
