@@ -3,7 +3,7 @@ from website.models import *
 from website.views import *
 from django.urls import reverse
 
-class ProductDetailViewTest(TestCase):
+class TripDetailViewTest(TestCase):
     """
     Purpose: Verify that when a trip is created that the Product Detail view has the correct trip with the trip's title, description, price and quantity in the response context 
     Args: (integer) trip pk
@@ -13,41 +13,43 @@ class ProductDetailViewTest(TestCase):
     def setUp(self):
 
         self.user = User.objects.create_user(
-            username = "mducharme",
-            email = "meg@meg.com",
+            username = "samyam",
+            email = "sam@test.com",
             password = "abcd1234",
-            first_name = "Meg",
-            last_name = "Ducharme"
+            first_name = "Sam",
+            last_name = "Yam"
         )
 
-        self.trip_type = ProductType.objects.create(trip_type_name="Test")
+        self.trip_type = TripType.objects.create(trip_type_name="Test")
 
         self.trip = Trip.objects.create(
             seller = self.user,
             trip_type = self.trip_type,
-            title = "emoji stickers",
+            title = "Trip to the snackery",
             description = "yay!",
             price = 1.99,
-            quantity = 500
+            location = "Nashville",
+            num_of_nights = 3,
+            quantity = 50
         )
 
         self.client.login(
-            username = "mducharme",
+            username = "samyam",
             password = "abcd1234"
         )
 
 
     def test_trip_detail_view_shows_correct_trip(self):
         response = self.client.get(reverse('website:single_trip', args=([self.trip.pk])))
-        self.assertEqual(response.context['trip'].title, 'emoji stickers')
+        self.assertEqual(response.context['trip'].title, 'Trip to the snackery')
 
 
-    def test_product_detail_view_shows_trip_details(self):
+    def test_trip_detail_view_shows_trip_details(self):
         response = self.client.get(reverse('website:single_trip', args=([self.trip.pk])))
-        self.assertContains(response, "emoji stickers")
+        self.assertContains(response, "Trip to the snackery")
         self.assertContains(response, "yay!")
         self.assertContains(response, "1.99")
-        self.assertContains(response, "500")
+        self.assertContains(response, "Nashville")
 
 
 class TripTypeViewTest(TestCase):
@@ -64,28 +66,33 @@ class TripTypeViewTest(TestCase):
             email = "mike@dm.com",
             password = "1111",
             first_name = "Michael",
-            last_name = "Scott"
+            last_name = "Scott",
+
         )
 
         self.trip_type1 = TripType.objects.create(trip_type_name="TestType1")
         self.trip_type2 = TripType.objects.create(trip_type_name="TestType2")
 
-        self.product = Trip.objects.create(
+        self.trip = Trip.objects.create(
             seller = self.user,
             trip_type = self.trip_type1,
-            title = "Hot Air Balloon Trip Around the World",
+            title = "Hiking Trip",
             description = "See the world from a hot air balloon.",
             price = 1115.99,
-            quantity = 12
+            location = "Nashville",
+            num_of_nights = 3,
+            quantity = 50            
         )
 
         self.trip = Trip.objects.create(
             seller = self.user,
             trip_type = self.trip_type1,
-            title = "Journey To The Center Of The Earth",
+            title = "Walking Trip",
             description = "It's gonna get really hot down there.",
             price = 10.99,
-            quantity = 3
+            location = "Nashville",
+            num_of_nights = 3,
+            quantity = 50
         )
 
         self.trip = Trip.objects.create(
@@ -94,7 +101,9 @@ class TripTypeViewTest(TestCase):
             title = "Journey To the Fridge",
             description = "Shouldn't show",
             price = 1.99,
-            quantity = 1
+            location = "Nashville",
+            num_of_nights = 3,
+            quantity = 50
         )
 
 
@@ -105,7 +114,7 @@ class TripTypeViewTest(TestCase):
 
     def test_trip_type_trips_view(self):
         response = self.client.get(reverse('website:get_trip_types', args=([self.trip_type1.pk])))  
-        self.assertQuerysetEqual(response.context['trips_of_type'], ["<Trip: Hot Air Balloon Trip Around the World>", "<Trip: Journey To The Center Of The Earthd>"],ordered=False)
+        self.assertQuerysetEqual(response.context['trips_of_type'], ["<Trip: Hiking Trip>", "<Trip: Walking Trip>"],ordered=False)
 
 class PaymentTypesViewTest(TestCase):
     """
@@ -116,11 +125,11 @@ class PaymentTypesViewTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username = "mducharme",
-            email = "meg@meg.com",
+            username = "samyam",
+            email = "sam@test.com",
             password = "abcd1234",
-            first_name = "Meg",
-            last_name = "Ducharme"
+            first_name = "Sam",
+            last_name = "Yam"
         )
 
         self.payment_type = PaymentType.objects.create(
@@ -142,7 +151,7 @@ class PaymentTypesViewTest(TestCase):
         )
 
         self.client.login(
-            username = "mducharme",
+            username = "samyam",
             password = "abcd1234"
         )
 
@@ -163,11 +172,11 @@ class TripsInCartViewTest(TestCase):
     def test_trips_show_in_cart(self):
         
         self.user = User.objects.create_user(
-            username = "mducharme",
-            email = "meg@meg.com",
+            username = "samyam",
+            email = "sam@test.com",
             password = "abcd1234",
-            first_name = "Meg",
-            last_name = "Ducharme"
+            first_name = "Sam",
+            last_name = "Yam"
         )
 
         self.customer = Customer.objects.create(
@@ -181,30 +190,36 @@ class TripsInCartViewTest(TestCase):
         self.trip_1 = Trip.objects.create(
             seller = self.user,
             trip_type = self.trip_type,
-            title = "emoji stickers",
+            title = "Long Trip",
             description = "yay!",
             price = 1.99,
-            quantity = 500
+            location = "Nashville",
+            num_of_nights = 3,
+            quantity = 50
         )
 
 
         self.trip_2 = Trip.objects.create(
             seller = self.user,
             trip_type = self.trip_type,
-            title = "Keys",
+            title = "Medium Trip",
             description = "They're keys",
             price = 3.00,
-            quantity = 100
+            location = "Nashville",
+            num_of_nights = 3,
+            quantity = 50
         )
 
 
         self.trip_3 = Trip.objects.create(
             seller = self.user,
             trip_type = self.trip_type,
-            title = "Magic Wand",
+            title = "Short Trip",
             description = "oh oh it's magic",
             price = 5.99,
-            quantity = 12
+            location = "Nashville",
+            num_of_nights = 3,
+            quantity = 50
         )
 
         self.payment_type = PaymentType.objects.create(
@@ -218,7 +233,7 @@ class TripsInCartViewTest(TestCase):
         )
 
 
-        self.trip_order_1 = Triprder.objects.create(
+        self.trip_order_1 = TripOrder.objects.create(
             trip = self.trip_1,
             order = self.order
         )
@@ -235,14 +250,14 @@ class TripsInCartViewTest(TestCase):
         )
 
         self.client.login(
-            username = "mducharme",
+            username = "samyam",
             password = "abcd1234"
         )
 
 
         response = self.client.get(reverse('website:cart'))
 
-        self.assertQuerysetEqual   (response.context["trips_in_cart"], ["<TripOrder: emoji stickers>", "<TripOrder: Keys>", "<TripOrder: Magic Wand>"])
+        self.assertQuerysetEqual (response.context["trips_in_cart"], ["<TripOrder: Long Trip>", "<TripOrder: Medium Trip>", "<TripOrder: Short Trip>"])
 
 
 
@@ -256,11 +271,11 @@ class OrderHistoryViewTest(TestCase):
     def setUp(self):
 
         self.user = User.objects.create_user(
-            username = "jnelson",
-            email = "jordo@jordo.com",
+            username = "samyam",
+            email = "sam@test.com",
             password = "abcd1234",
-            first_name = "Jordan",
-            last_name = "Nelson"
+            first_name = "Sam",
+            last_name = "Yam"
         )
 
         self.customer = Customer.objects.create(
@@ -273,10 +288,17 @@ class OrderHistoryViewTest(TestCase):
         self.trip = Trip.objects.create(
             seller = self.user,
             trip_type = self.trip_type,
-            title = "Beard Comb",
+            title = "Beard of Jordan",
             description = "Finest Facial Comb in the Land",
             price = "5.25",
-            quantity = "500"
+            location = "Nashville",
+            num_of_nights = 3,
+            quantity = 50
+        )
+
+        self.client.login(
+            username = "samyam",
+            password = "abcd1234"
         )
 
         self.order = Order.objects.create(
@@ -290,6 +312,5 @@ class OrderHistoryViewTest(TestCase):
 
     def test_order_history_view(self):
         response = self.client.get(reverse('website:order_detail', args=([self.trip.pk])))
-        print('The response: ', response)
-        self.assertContains(response, "Beard Comb")
+        self.assertContains(response, "Beard of Jordan")
         self.assertContains(response, "5.25")
