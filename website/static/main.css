@@ -9,8 +9,14 @@ hr {
 }
 
 /* Nav */
+
+#main-nav {
+	margin-bottom: 5em;
+}
+
 .search-group {
-	margin-top: 7px;
+	margin-top: 10px;
+	width: 30%;
 }
 
 .navbar {
@@ -32,11 +38,12 @@ hr {
 
 /* Login Page */
 #login-box {
-
+	margin-top: 6em;
 }
 
 /* Home Page */
 #index-title {
+	margin-top: 3.3em;
 	text-align: center;
 }
 

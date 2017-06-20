@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-fixed-top" id="main-nav">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
         <li class="">
@@ -7,62 +7,57 @@
             </a>
         </li>
         <li class="search-group">
-            <form action= "{% url 'website:search' %}" type="get" class="navbar-form navbar-left" role="search">
+            <form action= "{% url 'website:search' %}" type="get" class="navbar-form" role="search">
                 <input id="search_input" method="get" name="q" type="text" class="form-control" placeholder="Search TravelPack">
             </form>
         </li>
-        <li>
-            <a href="/trips">
-            <button type="button" class="btn btn-primary btn-md reg">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>  All Trips
-            </button>
-            </a>
-        </li>
-        <li>
-            <a href="/trip_types">
-            <button type="button" class="btn btn-primary btn-md reg">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>  Trip Categories
-            </button>
-            </a>
-        </li>
-        {% if user.is_authenticated %}
-        <li class="">
-            <a href="/profile">
-                <button type="button" class="btn btn-primary btn-md reg">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  My Profile
-                </button>
-            </a>
-        </li>
-        <li class="">
-            <a href="/cart">
-                <button type="button" class="btn btn-primary btn-md reg">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart
-                </button>
-            </a>
-        </li>
-        <li class="">
-            <a href="{% url 'website:logout' %}">
-                <button type="button" class="btn btn-danger btn-md logout">
-                    <span class="glyphicon glyphicon-log-out"></span>  Log out
-                </button>
-            </a>
-        </li>
-        {%else%}
-        <li class="">
-            <a href="/login">
-                <button type="button" class="btn btn-success btn-md">
-                    <span class="glyphicon glyphicon-log-in"></span>  Login
-                </button>
-            </a>
-        </li>
-        <li class="">
-            <a href="/register">
-                <button type="button" class="btn btn-success btn-md">
-                    <i class="fa fa-user-plus" aria-hidden="true"></i>  Register
-                </button>
-            </a>
-        </li>
-        {%endif%}
     </ul>
+    <ul class="nav navbar-nav navbar-right">   
+            <li>
+                <a href="/trips">
+                    <h4><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>  All Trips</h4>
+                </a>
+            </li>
+            <li>
+                <a href="/trip_types">
+                    <h4><span class="glyphicon glyphicon-th" aria-hidden="true"></span>  Trip Categories</h4>
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="">
+                <a href="/profile">
+                    <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  My Profile</h4>
+                </a>
+            </li>
+ 
+            <li class="">
+                <a href="/cart">
+                    <h4><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart</h4>
+                </a>
+            </li>
+            <li class="">
+                <a href="{% url 'website:logout' %}">
+                    <button type="button" class="btn btn-danger btn-md logout">
+                        <span class="glyphicon glyphicon-log-out"></span>  Log out
+                    </button>
+                </a>
+            </li>
+            {%else%}
+            <li class="">
+                <a href="/login">
+                    <button type="button" class="btn btn-success btn-md">
+                        <span class="glyphicon glyphicon-log-in"></span>  Login
+                    </button>
+                </a>
+            </li>
+            <li class="">
+                <a href="/register">
+                    <button type="button" class="btn btn-success btn-md">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>  Register
+                    </button>
+                </a>
+            </li>
+            {%endif%}
+        </ul>
   </div>
 </nav>

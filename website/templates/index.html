@@ -4,9 +4,13 @@
 
 {% load staticfiles %}
 
+    {% if user.is_authenticated %}
+
+		<h3 id="index-title"> Welcome back to TravelPack, {{ user.first_name}}! </h3>
+		{% else %}
 	<h3 id="index-title"> Welcome to TravelPack! </h3>
+	{% endif %}
 	<hr>
-	
 	<div class="col-xs-1"></div>
 	<div class="col-xs-10">
 	    <ol>

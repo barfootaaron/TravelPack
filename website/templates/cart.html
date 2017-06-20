@@ -2,9 +2,11 @@
 {% load staticfiles %}
 {% block content %}
 
-      <hr>
+    <div class="col-xs-4"></div>
+    <div class="cart-div col-xs-4">
       <h1>My Cart:</h1>
-    {% if total is not 0 %}
+        {% if total is not 0 %}
+      
       <table> 
         <tr>
           <th><h4>Trip Name</h4></th>
@@ -22,7 +24,9 @@
               <input type="hidden" name="the_id" value="{{ trip.id }}">
               <input type="hidden" name="trip_id" value="{{ trip.trip_id }}">
               <input type="hidden" name="order_id" value="{{ trip.order_id }}">
-              <button class="btn btn-danger btn-sm"> Delete from Cart </button>
+              <button class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </button>
             </form> 
 
             {% endif %}
@@ -45,6 +49,8 @@
       </form>
       {% endif %}
 
+      <br>
+
       {% if user.is_authenticated %}
       <form action="{% url 'website:final_order_view' %}" method="POST">
         <input type="hidden" name="order_id" value="{{ orderid }}">
@@ -60,5 +66,7 @@
     <h3>You have an empty cart!</h3><br><h2>Keep Shopping!!</h2>
     
     {% endif %}
+    </div>
+    <div class="col-xs-4"></div>
 
 {% endblock %}
