@@ -6,17 +6,26 @@
 
     {% if user.is_authenticated %}
 
-		<h3 id="index-title"> Welcome back to TravelPack, {{ user.first_name}}! </h3>
+		<h2 id="index-title">
+			Welcome back to TravelPack, {{ user.first_name}}!
+		</h2>
 		{% else %}
-	<h3 id="index-title"> Welcome to TravelPack! </h3>
+		<h3 id="index-title">
+			Welcome to TravelPack!
+		</h3>
 	{% endif %}
 	<hr>
-	<div class="col-xs-1"></div>
-	<div class="col-xs-10">
-	    <ol>
-	    <h4> Recently Added Trips </h4>
+
+	<h3 style="text-align:center;"><strong>Recently Added Trips</strong></h3>
+		<br>
+	<div class="row">
 	      {% for trip in trips %}
-	          <li><a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }} - {{ trip.description }}</a></li> 
+	          <div class="col-xs-4">
+	          	<h4 style="text-align:center;">{{ trip.title }}</h4>
+			        <img class="trip-img-thumb" src="{{ trip.trip_img.url }}" width="100%" height="100%">
+	        	</a>
+	          	</a>
+	    </div>
 	      {% endfor %}
 	    </ol>
 	</div>    

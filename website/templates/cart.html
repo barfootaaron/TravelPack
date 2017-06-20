@@ -2,16 +2,20 @@
 {% load staticfiles %}
 {% block content %}
 
+
     <div class="col-xs-4"></div>
     <div class="cart-div col-xs-4">
       <h1>My Cart:</h1>
+      <hr>
         {% if total is not 0 %}
       
-      <table> 
-        <tr>
-          <th><h4>Trip Name</h4></th>
-          <th><h4>Trip Price</h4></th>
-        </tr>
+      <table class="table"> 
+        <thead class="thead-inverse">
+          <tr>
+            <th><h4>Trip</h4></th>
+            <th><h4>Price</h4></th>
+          </tr>
+        </thead>  
 
       {% for trip in trips_in_cart %}
         <tr class="cart-line-item">
@@ -25,7 +29,7 @@
               <input type="hidden" name="trip_id" value="{{ trip.trip_id }}">
               <input type="hidden" name="order_id" value="{{ trip.order_id }}">
               <button class="btn btn-danger btn-sm">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
               </button>
             </form> 
 

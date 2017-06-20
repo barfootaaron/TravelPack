@@ -10,18 +10,22 @@
 		<ul>
 		    {% if user.is_authenticated %}
 			{% for payment_type in user_payment_types %}
-			    <li class="payment-type-line">{{ payment_type.payment_type_name }}
-					<form action="{% url 'website:delete_payment_type' %}" method="POST">
+			    <li style="display:inline;" class="payment-type-line">{{ payment_type.payment_type_name }}
+					<form style="display:inline;" action="{% url 'website:delete_payment_type' %}" method="POST">
 					{% csrf_token %}
 						<input type="hidden" name="payment_type_id" value="{{ payment_type.id }}">
-				        <button class="btn btn-danger">Delete</button>  
+				        <button class="btn btn-danger">
+				        	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+				        </button>  
 			        </form>
 			    </li>
 			    <br>
+			    <hr>
 			    
 			{% empty %}
 			    <a class="btn btn-default" href="add_payment_type">Add a Payment Type</a>
 		    {% endfor %}
+		    <a class="btn btn-default" href="{% url 'website:profile' %}">Return to your profile</a>
 		</ul>       
 	    
 		{% endif %}

@@ -5,25 +5,30 @@
 	{% if user.is_authenticated %}
 	<div class="col-xs-4"></div>
 	<div class="col-xs-4 profile-body">
-			<h4>{{ user.first_name}}'s Profile:</h4>
-			
-			<a class="btn btn-success profile-bttn" href="/user_wishlist">View Your Wishlist</a>
-			
+			<h4><strong>{{ user.first_name}}'s Profile: <a href="/user_wishlist">View Your Wishlist</a></strong></h4>
+			<hr>			
 			<br>
 			
-			<p><strong>Username:</strong>  {{user.username}}</p>
-			<p><strong>First Name:</strong>  {{user.first_name}}</p>
-			<p><strong>Last Name:</strong>  {{user.last_name}}</p>
-			<p><strong>Email:</strong>  {{user.email}}</p>
-			<p><strong>Phone number:</strong>  {{customer.phone}}</p>
-			<p><strong>Street address:</strong>  {{customer.street_address}}</p>
+			<div class="row">
+				<p class="col-xs-6"><strong>Username:</strong>  {{user.username}}</p>
+				<p class="col-xs-6"><strong>Email:</strong>  {{user.email}}</p>
+				
+				<p class="col-xs-6"><strong>First Name:</strong>  {{user.first_name}}</p>
+				<p class="col-xs-6"><strong>Last Name:</strong>  {{user.last_name}}</p>
+				
+				<p class="col-xs-6"><strong>Phone number:</strong>  {{customer.phone}}</p>
+				<p class="col-xs-6"><strong>Street address:</strong>  {{customer.street_address}}</p>
+			</div>	
+			
+			<br>
+			<h4><strong>Payment Options:</strong></h4>
+				<a class="" href="/add_payment_type">Add a Payment Type	</a>
+				<a>	|    </a>
+				<a href="/user_payment_types">View Your Payment Types</a><br>
 
-			<form id="update_form" action="{% url 'website:edit_settings' %}">
-				<button class="btn btn-info profile-bttn" type="submit" >Edit Profile</button>
-			</form>
 			<hr>
 			
-			<p><strong>Order History:</strong></p>
+			<h4><strong>Your Order History:</strong></h4>
 			{% for order in past_orders %}
 				<a href="{% url 'website:order_detail' order.id %}"><button class="btn btn-default">Order #{{order.id}}</button></a><br>
 				
@@ -31,12 +36,10 @@
 			No Orders have been placed for this customer.
 			{% endfor %}
 		
-		<hr>
-		<p><strong>Payment Options:</strong></p>
-		<a class="btn btn-success profile-bttn" href="/add_payment_type">Add a Payment Type</a>
-		<a class="btn btn-success profile-bttn" href="/user_payment_types">View Your Payment Types</a><br>
 
-		<hr>			
+		<hr>
+		<h4><strong>Account Options:</strong></h4>	
+		
 		<form id="update_form" action="{% url 'website:edit_settings' %}">
 			<button class="btn btn-info profile-bttn" type="submit" >Edit Profile</button>
 		</form>

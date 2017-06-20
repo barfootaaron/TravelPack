@@ -4,30 +4,36 @@
 
 {% load staticfiles %}
 
+{% if user.is_authenticated %}
+
 <div class="col-xs-3"></div>  
 <div class="col-xs-6">
     <h3 class="detail-pg-title"> <a href="/profile">{{ user.first_name}}'s</a> Wishlist</h3>
     <hr>
 	
-    <ul class="wishlist-items">
-        {% if user.is_authenticated %}
+    <table class="table wishlist-items">
             {% for trip in user_wishlist %}
+            <tr>
                 <a class="wishlist-items" href="{% url 'website:single_trip' trip.trip_id %}">
-                    <h4 class="wishlist-items">Trip: {{ trip.trip }} </h4> 
+                    <h4 class="wishlist-items">Trip: {{ trip.trip }} 
                     
-                    <form action="{% url 'website:remove_trip_from_wishlist' %}" method="POST">
+                    <form style="display:inline;" action="{% url 'website:remove_trip_from_wishlist' %}" method="POST">
                     {% csrf_token %}
                         <input type="hidden" name="wishlist_id" value="{{ trip.id }}">
-                        <button class="btn btn-danger">Remove</button>  
+                        <button class="btn btn-danger">
+                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>  
                     </form>
+                    </h4> 
                 </a> 
+            </tr>    
                 <br>
             
             {% empty %}
             <h3> You have not added any trips to your wishlist! </h3>
             
         {% endfor %}
-    </ul>    
+    </table>
 
     <hr>
     <a class="btn btn-default" href="/profile">Return to profile</a>
