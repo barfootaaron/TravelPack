@@ -1,10 +1,17 @@
 {% extends 'main.html' %}
-
+{% load staticfiles %}
 {% block content %}
 
 <div class="col-xs-1"></div>
 <div class="col-xs-10">
-	<h3>Trip Categories</h3><br>
+	<h3 style="text-align:center;">Trip Categories
+		<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
+		<span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+		<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+		<span class="glyphicon glyphicon-apple" aria-hidden="true"></span>
+		<span class="glyphicon glyphicon-tent" aria-hidden="true"></span>		
+	</h3>
+	<hr>
 
 	<ol class="row">
 		{% for triptype in trip_types %}

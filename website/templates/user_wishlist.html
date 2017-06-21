@@ -15,19 +15,18 @@
             {% for trip in user_wishlist %}
             <tr>
                 <a class="wishlist-items" href="{% url 'website:single_trip' trip.trip_id %}">
-                    <h4 class="wishlist-items">Trip: {{ trip.trip }} 
-                    
-                    <form style="display:inline;" action="{% url 'website:remove_trip_from_wishlist' %}" method="POST">
-                    {% csrf_token %}
-                        <input type="hidden" name="wishlist_id" value="{{ trip.id }}">
-                        <button class="btn btn-danger">
-                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>  
-                    </form>
+                    <h4 class="wishlist-items">Trip: {{ trip.trip }} - {{ trip.trip.num_of_nights }} nights
+                        <form style="display:inline;" action="{% url 'website:remove_trip_from_wishlist' %}" method="POST">
+                        {% csrf_token %}
+                            <input type="hidden" name="wishlist_id" value="{{ trip.id }}">
+                            <button class="btn btn-danger btn-sm">
+                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>  
+                        </form>
                     </h4> 
                 </a> 
             </tr>    
-                <br>
+            <br>
             
             {% empty %}
             <h3> You have not added any trips to your wishlist! </h3>

@@ -10,15 +10,15 @@
 		<ul>
 		    {% if user.is_authenticated %}
 			{% for payment_type in user_payment_types %}
-			    <li style="display:inline;" class="payment-type-line">{{ payment_type.payment_type_name }}
+			    <h4 style="display:inline;" class="payment-type-line">{{ payment_type.payment_type_name }}
 					<form style="display:inline;" action="{% url 'website:delete_payment_type' %}" method="POST">
 					{% csrf_token %}
 						<input type="hidden" name="payment_type_id" value="{{ payment_type.id }}">
-				        <button class="btn btn-danger">
+				        <button class="btn btn-danger btn-sm">
 				        	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 				        </button>  
 			        </form>
-			    </li>
+			    </h4>
 			    <br>
 			    <hr>
 			    

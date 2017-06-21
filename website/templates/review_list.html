@@ -3,9 +3,25 @@
 {% block content %}
 
 
-  {% for review in reviews %}
-    <h3> HII{{ tripreview.rating }}</h3>
-  {% endfor %}  
+<h2 style="text-align:center;">{{ trip.title }} Reviews</h2>
+<hr>
+
+
+<div class="col-xs-3"></div>
+<ul class="col-xs-6">
+  {% for review in review_list %}
+
+   	<h3>Trip Reviewed: {{ review.trip }} </h3>
+   	<h3>Rating: {{ review.rating }}/10 <span class="glyphicon glyphicon-star" aria-hidden="true"></span></h3>
+    <h3> Review: {{ review.review_text }}</h3>
+    <hr>
+
+   	{% empty %}
+    <h3> This trip does not have any reviews </h3>
+  
+  {% endfor %} 
+</ul> 
+<div class="col-xs-3"></div>  
 
 
 {% endblock %}  

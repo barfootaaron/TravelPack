@@ -149,6 +149,19 @@ def single_trip(request, trip_id):
          
         return render(request, template_name, {"trip": trip})
 
+def trip_reviews(request, trip_id):
+    """
+    Purpose: Allows user to view reviews for a trip
+    Args: trip_id: (integer): id of trip we are viewing reviews for
+    Returns: (render): a view of the request, template to use, and trip obj
+    """    
+
+    trip = Trip.objects.get(pk=trip_id)
+    review_list = TripReview.objects.filter(trip=trip_id)
+    template_name = 'review_list.html' 
+
+    return render(request, template_name, {"review_list": review_list})   
+
 
 @login_required(login_url='/login')
 def user_wishlist(request):    
@@ -176,7 +189,6 @@ def remove_trip_from_wishlist(request):
             user_wishlist = WishList.objects.filter(customer = request.user)
 
         return HttpResponseRedirect('/user_wishlist')    
-
 
 
 def list_trip_types(request):

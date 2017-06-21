@@ -5,7 +5,7 @@
 	{% if user.is_authenticated %}
 	<div class="col-xs-4"></div>
 	<div class="col-xs-4 profile-body">
-			<h4><strong>{{ user.first_name}}'s Profile: <a href="/user_wishlist">View Your Wishlist</a></strong></h4>
+			<h3><strong>{{ user.first_name}}'s Profile: <a href="/user_wishlist">View Your Wishlist</a></strong></h3>
 			<hr>			
 			<br>
 			
@@ -30,7 +30,10 @@
 			
 			<h4><strong>Your Order History:</strong></h4>
 			{% for order in past_orders %}
-				<a href="{% url 'website:order_detail' order.id %}"><button class="btn btn-default">Order #{{order.id}}</button></a><br>
+				<a href="{% url 'website:order_detail' order.id %}">
+						Order #{{order.id}}
+				</a>
+			<br>
 				
 			{% empty %}
 			No Orders have been placed for this customer.

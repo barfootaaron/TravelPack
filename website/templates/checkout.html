@@ -5,22 +5,32 @@
 {% load staticfiles %}
 
 {% if user.is_authenticated %}
+
+	<div class="col-xs-4"></div>
+	<div class="col-xs-4">
+	<h3><strong>Your Total is ${{ total }}</h3></strong>
+	<h4>*Please select a payment type</h4><br>
 	{% for pmt_type in adding_payment_types %}
+		<div style="display:inline;">
 		<form action="{% url 'website:order_confirmation' %}" method="POST">
 		{% csrf_token %}
 
-			<p><strong>Order Total:</strong> ${{ total }}</p>
+			
 			<input type="hidden" name="payment_type_id" value="{{ pmt_type.id }}">
 			<input type="hidden" name="order_id" value="{{ order_id }}">
-			Payment Type: {{ pmt_type }} <br />
-			Account Number: {{ pmt_type.account_number }} 
+			Payment Type: {{ pmt_type }}
 
     		<button class="btn btn-default btn-sm">Select</button>
+    		<hr>
     	</form>
+    	</div>
     {% empty %}
     <h3> You have not added a payment type. <br />
     <a href="{% url 'website:add_payment_type' %}">Please Add a Payment Type </a> </h3>
     {% endfor %}
-{% endif %}
+	{% endif %}
+	</div>
+	<div class="col-xs-4"></div>
+
 
 {% endblock %}

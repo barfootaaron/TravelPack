@@ -3,8 +3,14 @@
 {% block content %}
 
 
-	<h3>Your Order has been successfully cancelled!</h3>
-	<p>Thank you. Come again!</p>
+	<div class="col-xs-4"></div>
+	<div class="col-xs-4">
+		<h3>Your Order has been successfully cancelled!</h3>
+		<p>Please come again!</p>
+		<a class="btn btn-default" href="{% url 'website:profile' %}">Return to your profile</a>
+
+	</div>
+	<div class="col-xs-4"></div>
 
 
 {% endblock %}

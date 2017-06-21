@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load staticfiles %}
 {% block content %}
 
 	<div class="col-xs-2"></div>
@@ -9,10 +10,13 @@
 		{% endfor %}
 
 		{% for trip in trips_of_type %} <br />
-			<h3>Trip: <a href="{{ trip.get_absolute_url }}"> {{ trip.title }} </a></h3>
-			<p>Trip Length: {{ trip.num_of_nights }} nights</p>
-			<p>Location: {{ trip.location }}</p>
-			<p>Price: ${{ trip.price }}</p>
+			<a href="{{ trip.get_absolute_url }}"> 
+				<h3> {{ trip.title }} </h3>
+				<p>Trip Length: {{ trip.num_of_nights }} nights</p>
+				<p>Location: {{ trip.location }}</p>
+				<p>Price: ${{ trip.price }}</p>
+				<img class="trip-img-thumb" src="{{ trip.trip_img.url }}" width="100%" height="200px">
+			</a>
 			<hr>
 		{% endfor %}
 	</div>

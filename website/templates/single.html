@@ -28,7 +28,8 @@
     <h4><strong>Location:</strong> {{ trip.location }}</h4>
     <h4><strong>Category:</strong> {{ trip.trip_type }}</h4>
     <h4><strong>Description:</strong> {{ trip.description }}</h4>
-    <h4><strong> *Available to depart through {{ trip.last_dep_date }} </strong> </h4>  
+    <h4><strong> *Available to depart through {{ trip.last_dep_date }} </strong> </h4> 
+    <h3><a href="{% url 'website:trip_reviews' trip.id %}">View Trip Reviews</a></h3> 
   </div>  
   <div class="col-xs-3"></div> 
 </div>   
@@ -53,6 +54,7 @@
         <input type="hidden" name="wishlist" value="">
         <input class="btn add-to-cart-btn btn-success btn-lg" type="submit" value="Add to Wishlist">
     </form>  
+
   </div>
   <div class="col-xs-5"></div>
     {% endif %}  
