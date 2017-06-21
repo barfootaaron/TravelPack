@@ -2,25 +2,27 @@
 {% load staticfiles %}
 {% block content %}
 
-	<div class="col-xs-2"></div>
-	<div class="col-xs-8">
+	<div class="col-xs-1"></div>
+	<div class="col-xs-10">
 	<h2>Showing All:
 		{% for trip_type in trip_types %} 
 			{{ trip_type }}</h2>
 		{% endfor %}
 
 		{% for trip in trips_of_type %} <br />
-			<a href="{{ trip.get_absolute_url }}"> 
-				<h3> {{ trip.title }} </h3>
-				<p>Trip Length: {{ trip.num_of_nights }} nights</p>
-				<p>Location: {{ trip.location }}</p>
-				<p>Price: ${{ trip.price }}</p>
-				<img class="trip-img-thumb" src="{{ trip.trip_img.url }}" width="100%" height="200px">
+			<a  href="{{ trip.get_absolute_url }}"> 
+				<div style="text-align:center;">	
+					<h3> {{ trip.title }} </h3>
+					<p>Trip Length: {{ trip.num_of_nights }} nights</p>
+					<p>Location: {{ trip.location }}</p>
+					<p>Price Per Couple: ${{ trip.price }}</p>
+					<img class="trip-img-thumb" src="{{ trip.trip_img.url }}" width="100%" height="100%">
+				</div>
 			</a>
 			<hr>
 		{% endfor %}
 	</div>
-	<div class="col-xs-2"></div>
+	<div class="col-xs-1"></div>
 		
 
 {% endblock %}

@@ -116,6 +116,9 @@ def list_trips(request):
     template_name = 'list.html'
     return render(request, template_name, {'trips': all_trips})
 
+
+
+
 def single_trip(request, trip_id):
     """
     Purpose: Allows user to view trip_detail view, which contains a very specific view

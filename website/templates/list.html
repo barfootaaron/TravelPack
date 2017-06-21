@@ -10,8 +10,8 @@
 	    {% for trip in trips %}
 	        <div class="col-xs-6 col-md-4 all-trips-list-div">  
 	        	<a href="{% url 'website:single_trip' trip.id %}">
-	        	<h4 style="text-align:center;">{{ trip.title }} - {{ trip.num_of_nights }} nights</h4>
-			        <img class="trip-img-thumb" src="{{ trip.trip_img.url }}" width="100%" height="100%">
+	        		<h4 style="text-align:center;">{{ trip.title }} - {{ trip.num_of_nights }} nights</h4>
+			    	<img class="trip-img-thumb" src="{{ trip.trip_img.url }}" width="100%" height="100%">
 	        	</a>
 	        </div> 
 	    {% endfor %}

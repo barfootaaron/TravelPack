@@ -25,7 +25,8 @@
 			{% empty %}
 			    <a class="btn btn-default" href="add_payment_type">Add a Payment Type</a>
 		    {% endfor %}
-		    <a class="btn btn-default" href="{% url 'website:profile' %}">Return to your profile</a>
+		    <a class="btn btn-default" href="{% url 'website:profile' %}">Return to your profile</a><br>
+		    <a class="btn btn-default" href="add_payment_type">Add a Payment Type</a>
 		</ul>       
 	    
 		{% endif %}
