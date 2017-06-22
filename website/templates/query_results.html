@@ -2,10 +2,19 @@
 
 {% block content %}
 
-<h3>Search Results:</h3>
-  <ul>
+<h3 style="text-align:center; margin-top:3.3em">Search Results:</h3>
+<hr>
+<div class="col-xs-3"></div>
+<div style="text-align:center;" class="col-xs-6">
+  <ol>
   {% for trip in search %}
-    <li><a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }} - {{ trip.description }}</a></li> 
+    <li>
+    	<h4>
+    		<a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }} - {{ trip.location }}</a>
+    	</h4> 
+    </li>
   {% endfor %}
-  </ul>
+  </ol>
 {% endblock %}
+</div>
+<div class="col-xs-3"></div>

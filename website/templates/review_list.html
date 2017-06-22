@@ -2,10 +2,10 @@
 {% load staticfiles %}
 {% block content %}
 
-
-<h2 style="text-align:center;">{{ trip.title }} Reviews</h2>
-<hr>
-
+{% if review_list %}
+	<h2 style="text-align:center;">{{ trip.title }} Reviews</h2>
+	<hr>
+{% endif %}
 
 <div class="col-xs-3"></div>
 <ul class="col-xs-6">
@@ -18,7 +18,7 @@
 
    	{% empty %}
     <h3> This trip does not have any reviews </h3>
-  
+ 
   {% endfor %} 
 </ul> 
 <div class="col-xs-3"></div>  
