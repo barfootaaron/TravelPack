@@ -60,5 +60,6 @@ Special thanks to the Illegal Llamas team members for their contributions to the
 
 ## License
 [MIT © Illegal Llamas](./LICENSE)
+
 [MIT © Aaron Barfoot](./LICENSE)
 
