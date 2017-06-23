@@ -13,6 +13,8 @@
     		<a href="{% url 'website:single_trip' trip.id %}">{{ trip.title }} - {{ trip.location }}</a>
     	</h4> 
     </li>
+    {% empty %}
+			<h4>Your search did not return any results :(</h4>
   {% endfor %}
   </ol>
 {% endblock %}
