@@ -35,7 +35,6 @@ hr {
 }
 
 
-
 /* Login Page */
 #login-box {
 	margin-top: 6em;
@@ -49,7 +48,7 @@ hr {
 
 /* List Page (All Trips) */
 .all-trips-list-div {
-	height: 15em;
+	height: 20em;
 	padding: 2em;
 	margin-bottom: 30px;
 

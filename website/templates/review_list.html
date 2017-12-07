@@ -3,12 +3,12 @@
 {% block content %}
 
 {% if review_list %}
-	<h2 style="text-align:center;">{{ trip.title }} Reviews</h2>
+	<h2 style="text-align:center;margin-top:3em;">{{ trip.title }}All Reviews</h2>
 	<hr>
 {% endif %}
 
-<div class="col-xs-3"></div>
-<ul class="col-xs-6">
+<div class="col-xs-4"></div>
+<ul class="col-xs-4">
   {% for review in review_list %}
 
    	<h3>Trip Reviewed: {{ review.trip }} </h3>
@@ -21,7 +21,7 @@
  
   {% endfor %} 
 </ul> 
-<div class="col-xs-3"></div>  
+<div class="col-xs-4"></div>  
 
 
 {% endblock %}  

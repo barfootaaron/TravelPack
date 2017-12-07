@@ -40,13 +40,11 @@
   <div class="col-xs-2">             
     {% if user.is_authenticated %}
     
-      {% if trip.quantity > 0 %}
+
       <form action="/add_to_cart/{{ trip.id }}/" method="POST">
       {% csrf_token %}
           <button class="btn add-to-cart-btn btn-success btn-lg">Book Trip</button>
       </form>
-      {% endif %}
-
 
   <br>    
     <form action="{% url 'website:single_trip' trip.id %}" method="POST">
