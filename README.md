@@ -37,7 +37,7 @@ cd travelpack
 Setting up the database:
 
 ```
-python migrate_things.sh
+./migrate_things.sh
 ```
 Run project in browser:
 
